@@ -4,427 +4,358 @@
 
 ### Build. Ship. Survive.
 
-*A gamified, turn-based hackathon experience, from team assembly to final judging, built entirely in the browser.*
+**A two-mode workspace for building a hackathon idea from scratch or understanding an existing codebase.**
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript)](https://typescriptlang.org/)
-[![Zustand](https://img.shields.io/badge/Zustand-5-orange?style=for-the-badge)](https://zustand-demo.pmnd.rs/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2-149ECA?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Zustand](https://img.shields.io/badge/Zustand-5-orange)](https://zustand-demo.pmnd.rs/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
 
-<br/>
-
-> Ever wondered what it feels like to compete in a hackathon without leaving your desk?
->
-> The Hackathon Simulator drops you into a timed, pressure-cooker scenario where every decision, from your team configuration to your elevator pitch, determines whether you walk away with the trophy or crash at compile time.
-
-<br/>
-
-[**Play Now**](#getting-started) | [**Documentation**](#architecture) | [**Report Bug**](https://github.com/udaysharmadev/The-Hackathon-Simulator/issues) | [**Request Feature**](https://github.com/udaysharmadev/The-Hackathon-Simulator/issues)
+[Explore the project](#-project-overview) · [Features](#-features) · [Setup](#-getting-started) · [API](#-api-routes)
 
 </div>
 
 ---
 
-## Table of Contents
+## 📌 Project overview
 
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
-  - [High-Level Architecture](#high-level-architecture)
-  - [Zustand State Architecture](#zustand-state-architecture)
-- [The 14-Stage Game Pipeline](#the-14-stage-game-pipeline)
-- [Teammate & AI Co-Founder System (v2.0)](#teammate--ai-co-founder-system-v20)
-  - [Teammate Personalities](#teammate-personalities)
-  - [Interactive Advice & Gating](#interactive-advice--gating)
-  - [Crew Voting Conflict Engine](#crew-voting-conflict-engine)
-- [Pitch Deck Builder (v1.5)](#pitch-deck-builder-v15)
-- [Scoring Engine & Point System](#scoring-engine--point-system)
-  - [Judge Personality Profiles & Weights](#judge-personality-profiles--weights)
-  - [Synergy & Modifier Rules](#synergy--modifier-rules)
-  - [Grade Thresholds](#grade-thresholds)
-- [Security Audits & Hardened APIs](#security-audits--hardened-apis)
-  - [Multi-Provider AI Setup](#multi-provider-ai-setup)
-  - [Sliding Window Rate Limiter](#sliding-window-rate-limiter)
-  - [Input Validation & XSS Sanitization](#input-validation--xss-sanitization)
-  - [Prompt Injection Shield](#prompt-injection-shield)
-  - [Timeout & Payload Protections](#timeout--payload-protections)
-- [Anti-AI Language Filters & Humanization](#anti-ai-language-filters--humanization)
-- [Chaos Engine](#chaos-engine)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+The Hackathon Simulator is a web application built around two ways of working with hackathon projects:
 
----
+1. **Classic Hackathon Simulation** — take an idea through a simulated hackathon workflow. Make product and technical decisions, assemble a team, select a solution and technology stack, prioritize features, prepare a pitch deck, receive teammate and mentor feedback, and face a judge.
+2. **Codebase X-Ray** — upload a ZIP archive of an existing software project and receive a structured review of its codebase. The report covers detected technologies, project structure, important files, architecture clues, implemented and incomplete feature signals, potential issues, security findings, and improvement suggestions.
 
-## Overview
+The application is designed to make the process of planning a new project and reviewing an existing one more interactive and understandable.
 
-The Hackathon Simulator is a single-player, turn-based strategy simulation built with Next.js 16, React 19, and Zustand 5. It faithfully recreates the entire lifecycle of a hackathon: selecting a difficulty level, assembling a balanced team of developers and designers, receiving a randomized problem statement, building an architecture stack with intelligent recommendation matrices, prioritizing features, organizing a presentation deck outline, consulting co-founder mentors, preparing a pitch, and defending your project before specialist judges.
+> **Note:** X-Ray performs source-based analysis of the files included in the uploaded archive. Its findings are signals for review, not a guarantee that the application is secure, correct, or production-ready.
 
-The core gameplay is a focused turn-based challenge without a global countdown. Every choice you make silently adjusts internal scores across four main categories, with teammates and AI co-founders actively auditing your decisions. At the end, a randomly selected judge evaluates your run and delivers personalized, context-aware commentary, or a brutal roast, based on every selection you made.
+## 🧭 Choose a mode
 
----
+### 01 — Classic Hackathon Simulation
 
-## Key Features
+The simulation guides a player through decisions involved in shaping a hackathon project.
 
-- **The 14-Stage Pipeline**: From choosing difficulty and forming your crew to the compiler animation and results dashboard.
-- **Teammates & Co-Founders (v2.0)**: Onboard 4 unique teammates who offer active advice and spark realistic voting conflicts on strategies.
-- **Pitch Deck Builder (v1.5)**: Assemble a slide deck from 31 available components, evaluated on logical flow, storytelling, and clarity.
-- **Hardened Security Architecture**: Absolute protection against exploitation, implementing rate limiters, payload controls, and prompt injection shields.
-- **Multi-Provider AI Fallbacks**: Automatic routing between OpenAI, OpenRouter, and Gemini for roast generation, with local procedural fallbacks.
-- **Anti-AI Copier Filter**: Dynamic text cleaning that converts generic AI jargon and removes emoji bloat, ensuring roasts and PRDs read naturally.
-- **Vector Recommendation Engine**: Adaptive tech recommendations matching 42 unique combinations of solution directions and USPs.
-- **Persistent Achievement Tracker**: 13 unique milestones stored in LocalStorage alongside run histories and telemetry charts.
+The workflow includes:
 
----
+- Selecting a challenge and forming a team.
+- Reviewing a problem statement and choosing a solution direction.
+- Selecting a technology stack and defining a unique selling proposition (USP).
+- Prioritizing features.
+- Arranging a pitch deck.
+- Consulting teammates and mentors.
+- Choosing a business model and preparing the final pitch.
+- Going through judge evaluation and reviewing the result.
 
-## Architecture
+The game uses a stage-based flow, decision data, scoring logic, teammate interactions, mentor hints, random events, and judge feedback. The exact outcome depends on the decisions made during a run.
 
-### High-Level Architecture
+### 02 — Codebase X-Ray
 
-```mermaid
-graph TB
-    subgraph Client["Browser Client (Next.js 16 + React 19)"]
-        direction TB
-        LP["Landing Page<br/>(app/page.tsx)"]
-        GP["Game Page<br/>(app/game/page.tsx)"]
-        GL["GameLayout<br/>(components/game/)"]
+X-Ray is intended for an existing project rather than a new simulated idea.
 
-        subgraph Components["UI Components"]
-            DD["Drag and Drop<br/>(DraggableCard, DropZone)"]
-            UI["shadcn/ui<br/>(Button, Card, Dialog)"]
-            GC["Game Components<br/>(JudgeWheel)"]
-        end
+**Workflow**
 
-        subgraph Store["Zustand Store (5 Slices)"]
-            CS["Core Slice"]
-            TS["Timer Slice"]
-            SS["Scoring Slice"]
-            MS["Mentor Slice"]
-            JS["Judging Slice"]
-        end
+1. Open **Codebase X-Ray** from the home page.
+2. Select or drag in a `.zip` project archive.
+3. Start the analysis.
+4. Review the generated report.
 
-        subgraph Data["Static Data Layer"]
-            PR["22 Problems"]
-            JD["5 Judges"]
-            TR["114 Tech Registry Items"]
-            AT["6 Architecture Templates"]
-        end
-    end
+**The report can include:**
 
-    subgraph Persistence["Browser Storage"]
-        LS["LocalStorage<br/>(zustand persist)"]
-    end
+| Report area | What it shows |
+|---|---|
+| Project summary | Project name and a generated or source-derived overview |
+| Languages and frameworks | Technologies detected from file extensions and project manifests |
+| Dependencies | Dependencies identified from supported manifests |
+| Folder structure | A view of the archive's project paths |
+| Important files | Key source, configuration, test, and documentation files |
+| Architecture | Detected entry points, layers, and architecture notes |
+| Implemented features | Feature signals found in the available source |
+| Incomplete features | Potentially unfinished or partially represented functionality |
+| Potential issues | Source-based issues worth investigating |
+| Security findings | Potential security concerns identified by the analysis |
+| Improvement suggestions | Suggested areas to inspect or improve |
 
-    LP --> GP
-    GP --> GL
-    GL --> Components
-    GP --> Store
-    Store --> Data
-    Store <--> LS
-```
+X-Ray can return one of two report modes:
 
-### Zustand State Architecture
+- **AI-enriched** — static analysis is supplemented with an available configured AI provider.
+- **Static report** — a local static-analysis report is returned when AI enrichment is unavailable or cannot be used.
 
-The central game state is structured into four logical slices. This structure supports high modularity and keeps state management clean. The Core Slice handles the stage machine, Scoring Slice handles the point system, Mentor Slice tracks teammate interactions, and Judging Slice stores persistent feedback and achievements.
+The analysis is based on the contents of the uploaded archive. It does not install dependencies, run the uploaded application, execute its tests, or perform a live penetration test.
 
----
+## ✨ Features
 
-## The 14-Stage Game Pipeline
+### Simulation features
 
-The simulation implements a linear stage machine. Players progress turn by turn, with chaos events and co-founder conversations triggering dynamically at transition gates:
+- **Stage-based hackathon flow** for progressing from challenge definition to final judging.
+- **Team and teammate system** with distinct specialist perspectives.
+- **Mentor guidance** through contextual hints and advice.
+- **Technology selection** supported by curated technology data and recommendation logic.
+- **Feature prioritization** with drag-and-drop interactions.
+- **Pitch deck builder** with slide-order evaluation.
+- **Scoring engine** that evaluates decisions across multiple project dimensions.
+- **Judge profiles and feedback** with different evaluation priorities.
+- **Chaos events and modifiers** that introduce changing constraints during a run.
+- **Daily challenge logic** and game-mode state handled by the game store.
+
+### Codebase X-Ray features
+
+- ZIP upload through file selection or drag and drop.
+- Archive validation and bounded extraction.
+- Detection of common programming languages and project technologies.
+- Inspection of supported source and configuration files.
+- Project structure and important-file summaries.
+- Findings grouped by implementation, completeness, potential issues, and security.
+- Optional AI enrichment with static fallback behavior.
+- Upload and request limits intended to reduce resource abuse.
+
+## 🏗️ Application architecture
+
+The project uses the Next.js App Router. The home page provides access to the simulation and X-Ray workspaces. The simulation is primarily coordinated through the game page and Zustand store. X-Ray has a separate upload workspace, analysis API, ZIP extraction utility, and project analyzer.
 
 ```mermaid
-stateDiagram-v2
-    [*] --> difficulty: Start Game
-    difficulty --> teamFormation: SELECT_DIFFICULTY
-    teamFormation --> problemReveal: CONFIRM_TEAM
-    problemReveal --> solutionDirection: CONTINUE
-    solutionDirection --> techStack: CONTINUE
-    techStack --> usp: CONTINUE
-    usp --> features: CONTINUE
-    features --> pitchDeck: CONTINUE
-    pitchDeck --> mentor: CONTINUE
-    mentor --> businessModel: CONTINUE
-    businessModel --> pitchPrep: CONTINUE
-    pitchPrep --> judgeSpin: CONTINUE
-    judgeSpin --> judging: SUBMIT_TO_JURY
-    judging --> results: PROCESS_RESULTS
+flowchart TD
+    HOME["Home page<br/>app/page.tsx"]
+    HOME --> GAME["Classic simulation<br/>/game"]
+    HOME --> XRAY["Codebase X-Ray<br/>/xray"]
 
-    state transition_gates <<choice>>
-    problemReveal --> transition_gates: Gate
-    techStack --> transition_gates: Gate
-    features --> transition_gates: Gate
-    businessModel --> transition_gates: Gate
+    GAME --> GAMEUI["Game UI components"]
+    GAME --> STORE["Zustand game store"]
+    STORE --> DATA["Game data and scoring logic"]
+    GAME --> APIS["Generation APIs"]
 
-    transition_gates --> TeamChat: 20% Chance (If Team Size >= 2)
-    transition_gates --> ChaosEvent: 15% Chance (35% if Chaos Magnet)
-    transition_gates --> [*]: Normal Transition
+    XRAY --> UPLOAD["ZIP upload workspace"]
+    UPLOAD --> API["/api/analyze-project"]
+    API --> ZIP["ZIP validation and extraction"]
+    ZIP --> ANALYZER["Static project analyzer"]
+    ANALYZER --> AI["Optional AI enrichment"]
+    AI --> REPORT["Structured analysis report"]
+    ANALYZER --> REPORT
 ```
 
----
+### Main implementation areas
 
-## Teammate & AI Co-Founder System (v2.0)
+- `app/` — routes, layouts, styles, and API handlers.
+- `components/game/` — simulation layout, decision, judge, problem, and result UI.
+- `components/drag-drop/` — drag-and-drop interfaces for technology and feature selection.
+- `components/xray/` — X-Ray upload workspace and report presentation.
+- `store/` — Zustand game state and actions.
+- `data/` — curated game content, judges, technologies, modifiers, and events.
+- `lib/` — scoring, recommendations, generation, security, ZIP extraction, and codebase analysis.
+- `types/` — shared TypeScript types.
 
-Compete alongside a simulated product team. Rather than building solo, you assemble a squad that reacts directly to your scoping and architectural choices.
+## 🧰 Technology stack
 
-### Teammate Personalities
+| Technology | Role in this project |
+|---|---|
+| Next.js 16 | React framework, App Router, and server API routes |
+| React 19 | Component-based user interface |
+| TypeScript 5 | Application types and safer development |
+| Zustand 5 | Simulation state management and persistence |
+| Tailwind CSS 4 | Styling and responsive layouts |
+| Framer Motion | Interface transitions and motion |
+| dnd-kit | Drag-and-drop interactions |
+| Base UI | Accessible UI primitives used by local components |
+| Zod 4 | Request and payload validation |
+| yauzl | Reading and extracting ZIP archives |
+| Lucide React | Interface icons |
+| Vercel Analytics | Application analytics integration |
 
-You can choose from four core specialist roles at the start of the game, each with distinct preferences:
+## 📂 Project structure
 
-- **The Builder (Backend / AI)**: Focuses on technical feasibility and scaling databases. Prefers standard templates like Node.js or FastAPI, and hates over engineering.
-- **The Designer (UI / UX)**: Evaluates user friction, styling, and visual onboarding flows. Prioritizes stunning screens and hates headless architectures.
-- **The Dreamer (AI / Innovations)**: Pushes for cutting-edge frameworks, vector registries, and highly innovative USPs.
-- **The Founder (Strategy / Business)**: Keeps an eye on market size, LTV, pricing models, and pitch narrative clarity.
-
-### Interactive Advice & Gating
-
-Using a **Help Token**, you can request strategic feedback from a teammate once per stage:
-- **Observation**: What the teammate notices about your current project state.
-- **Concern**: What technical or commercial risk your choice introduces.
-- **Recommendation**: A concrete actionable change proposed by the teammate.
-- **Expected Impact & Tradeoffs**: The numeric score changes that will apply if you follow the advice.
-
-Teammate suggestions are gated using a **Stage Relevancy Checker**. A teammate will refuse to offer advice if the current stage is outside their expertise. For example, a frontend designer will stay silent during database migration setup, keeping advice focused and contextually sound.
-
-### Crew Voting Conflict Engine
-
-When choosing a **Unique Selling Proposition (USP)** or **Business Model**, you can initiate a **Crew Vote** to secure alignment. We implemented a realistic conflict engine:
-
-- **Enthusiastic Consensus**: If an option is outstanding, which means average scores exceed 75% or a key metric is above 85%, the entire crew votes **YES** in unison. This looks realistic because everyone recognizes a great idea.
-- **Dynamic Split Voting (Conflict)**: For standard options, teammates vote individually based on role preferences. They will conflict with each other by voting **NO** on ideas that do not fit their specific domain:
-  - Backend developers vote **NO** on decentralized exchange structures, complaining about race conditions and database locks.
-  - Designers vote **NO** on developer API models, pointing out that a headless product gives the judges nothing to look at.
-  - Strategists vote **NO** on transaction models with thin margins, pointing out low LTV ratios.
-  - If a majority approves, the strategy is applied and grants a **+5 Bonus Points** team alignment boost.
-
----
-
-## Pitch Deck Builder (v1.5)
-
-Players must organize a cohesive presentation deck to convince the jury. The deck builder lets you drag and drop slides from a pool of **31 available components** into an ordered outline of up to 10 slots.
-
-An evaluation engine checks your slide order and provides analytical critiques:
-- **Problem before Solution**: Placing the customer pain slide before the solution slide increases clarity, boosting scores.
-- **Tech before Problem Penalty**: Leading with backend architecture diagrams before stating the customer problem causes a major deduction.
-- **Wedge Sequence**: Placing TAM/SAM/SOM, competitor moats, and business models in consecutive order yields a large business score bonus.
-
----
-
-## Scoring Engine & Point System
-
-The game implements a multi-axis scoring matrix. Every decision silently updates hidden variables, which are compiled during judging.
-
-**Point Formula:**
-```
-Weighted Score = (Innovation x W_inno) + (Execution x W_exec) + (Design x W_des) + (Pitch x W_pit)
-Final Score = Clamped (Weighted Score + Synergy Bonuses + Modifier Adjustments, 0, 100)
-```
-
-### Judge Personality Profiles & Weights
-
-The final judge you face heavily influences how your categories are weighted. Each judge has a distinct background and cares about different things:
-
-| Judge Name | Title & Profile | Innovation | Execution | Design | Pitch | Focus Areas |
-|---|---|---|---|---|---|---|
-| **Uday Sharma** | EdTech Creator & Hackathon Specialist | 25% | **40%** | 10% | 25% | MVP Scoping, Rapid Prototyping, User Validation, Product Practicality |
-| **Bart** | Startup Founder | **35%** | 15% | 10% | **40%** | Startup Building, Product Strategy, Growth Hack, Product-Market Fit |
-| **Nishika** | Corporate Product Designer / UI-UX Specialist | 10% | 15% | **50%** | 25% | UI/UX Design, Accessibility Scales, User Flows, Design Systems |
-| **Sejal** | Business Analyst | 15% | 30% | 10% | **45%** | Business Strategy, Market Analysis, Revenue Models, Data-Driven Decisions |
-| **Jitu** | Professor & Academic Mentor | 25% | 25% | 25% | 25% | CS Fundamentals, Software Engineering, System Design, Technical Feasibility |
-
-### Synergy & Modifier Rules
-
-- **Tech Synergies**: Combining compatible tools triggers bonus multipliers.
-- **Strategic Modifiers**: Rules that alter calculations. For example `LIMITED_BUDGET` rejects high-overhead infrastructure like AWS and PostgreSQL, penalizing execution. `FAST_SHIP` reduces scores if you attempt to build more than two Must-Have features.
-
-### Grade Thresholds
-
-| Grade | Score Range | Verdict |
-|---|---|---|
-| **S** | 94 to 100 | Venture-Scale Unicorn Potential |
-| **A** | 84 to 93 | High-Growth Accelerator Target |
-| **B** | 72 to 83 | Promising Seed Bootstrapper |
-| **C** | 60 to 71 | Standard Lifestyle Business |
-| **D** | 48 to 59 | Compile Failed (Duct-taped Prototype) |
-| **F** | Below 48 | Compile Failed (Digital Smoke) |
-
----
-
-## Security Audits & Hardened APIs
-
-All AI endpoints (including PRD generation, custom problem creation, and final project roasts) are protected by a hardened server architecture in `app/api/generate-roast/route.ts`, preventing data leaks or server load issues.
-
-```mermaid
-graph TD
-    Request["Incoming POST Request"] --> SizeCheck{"1. Size Check<br/>(< 50KB)"}
-    SizeCheck -- Yes --> RateLimiter{"2. Rate Limiter<br/>(Sliding Window)"}
-    SizeCheck -- No/Oversized --> R413["413 Payload Too Large"]
-    
-    RateLimiter -- Success --> InputValidation{"3. Zod Schema Validation"}
-    RateLimiter -- Limit Exceeded --> R429["429 Too Many Requests"]
-    
-    InputValidation -- Valid --> InjectShield{"4. Injection Shield<br/>(Prompt Jailbreaks)"}
-    InputValidation -- Invalid Headers --> R400["400 Malformed JSON"]
-    
-    InjectShield -- Safe --> Sanitizer["5. XSS Sanitization & Input Stripper"]
-    InjectShield -- Suspicious Text --> FallbackResponse["Execute Safe Local Fallback"]
-    
-    Sanitizer --> AIAPI{"6. AI API Dispatch<br/>(3s Fetch Timeout)"}
-    AIAPI -- Response Received --> AntiAIFilter["7. Anti-AI Copy Filter<br/>(Humanize Jargon)"]
-    AIAPI -- Timeout/Failure --> FallbackResponse
-    
-    AntiAIFilter --> SuccessJSON["Return Pristine Humanized JSON"]
-```
-
-### Multi-Provider AI Setup
-
-The platform does not rely on a single AI provider. The backend logic checks environment variables securely and routes the generation request in the following priority order:
-1. **OpenAI API** (`gpt-4o-mini`) via `OPENAI_API_KEY`.
-2. **OpenRouter API** (`openai/gpt-4o-mini`) via `OPENROUTER_API_KEY`.
-3. **Google Gemini API** (`gemini-2.5-flash:generateContent`) via `GEMINI_API_KEY`.
-
-If API keys are missing, fake placeholders, or network requests time out, the system automatically falls back to an internal **Procedural Roast Generator**, ensuring players always receive feedback instantly without breaking the game flow.
-
-### Sliding Window Rate Limiter
-
-Implemented in `lib/rateLimit.ts`, the rate limiter tracks client IPs using a sliding window buffer:
-- **Configuration**: Maximum of 10 requests per minute per IP.
-- **Memory Leak Protection**: Runs active cache pruning every 10 minutes, clearing stale timestamps and freeing up memory.
-- **Upstream Proxy Support**: Extracts real client IPs securely, parsing headers to prevent IP spoofing.
-
-### Input Validation & XSS Sanitization
-
-- **Zod Schemas**: Every API payload is verified against strict schemas. Unexpected parameters are discarded, and string lengths are clamped to prevent buffer overloads.
-- **XSS Sanitizer**: The system strips HTML tags and escapes characters (like `<` to `&lt;`), rendering user inputs safe for display in React components.
-
-### Prompt Injection Shield
-
-An active text scanner in `lib/security.ts` scans all user inputs for jailbreak attempts:
-- Identifies common attack signatures, such as "ignore previous instructions", "system override", or "developer mode".
-- **Silent Defensive Action**: If a prompt injection attempt is detected, the API blocks the request to external LLMs and redirects to the local procedural fallback generator, logging the IP address for security audits.
-
-### Timeout & Payload Protections
-
-- **Oversized Payload Rejections**: Inspects the `Content-Length` header, rejecting requests larger than 50KB immediately to protect server bandwidth.
-- **Fetch Timeout Aborts**: Dispatches network requests with a 10-second timeout. If the AI model lags, an `AbortController` terminates the connection, switching immediately to local procedural fallbacks.
-
----
-
-## Anti-AI Language Filters & Humanization
-
-To maintain a professional, natural, and engaging tone, all generated text passes through a humanization filter:
-
-1. **Jargon Stripping**: Searches for and removes typical AI copywriter words, such as "delve", "realm", "landscape", "testament", "seamless", "robust", "groundbreaking", "ever-evolving", "foster", and "pivotal".
-2. **Quote Normalization**: Converts curly quotes to clean straight quotes to prevent visual syntax issues.
-3. **Typography Cleanup**: Automatically removes markdown bold tags and cleans up spacing or punctuation anomalies.
-4. **Absolute Emoji and Em dash Ban**: Strips all em dashes and emojis, keeping text readable and professional. We use commas and periods instead.
-
----
-
-## Chaos Engine
-
-The Chaos Engine introduces unpredictable events that interrupt gameplay between stage transitions. Each event presents a binary choice with meaningful tradeoffs covering technical failures (spilled energy drinks, API outages), team conflicts, sponsor unlocks, and last-minute jury mandate pivots. Events are selected using a weighted random algorithm that excludes previously triggered incidents.
-
----
-
-## Tech Stack
-
-| Tool | Version | Purpose |
-|---|---|---|
-| **Next.js** | 16.2 | Asynchronous React Meta-Framework with App Router |
-| **React** | 19.2 | Dynamic Component Rendering Engine |
-| **Zustand** | 5.0 | Persistent State Store with Slice Architecture |
-| **Framer Motion** | 12.4 | Fluid Transitions, Springs, and SVG Animations |
-| **@dnd-kit** | 6.3 | Drag-and-Drop system for Tech Stack & Features |
-| **Tailwind CSS** | 4.x | Utility-first Design Tokens and Layout Styling |
-| **Lucide React** | 1.17 | Clean, Scalable Monochromatic Icons |
-
----
-
-## Project Structure
-
-```
+```text
 The-Hackathon-Simulator/
-│
-├── app/                              # Next.js App Router Pages
-│   ├── layout.tsx                    # Global Fonts, Metadata, and SEO
-│   ├── page.tsx                      # Landing Lobby Page
-│   ├── globals.css                   # Tailwind Design Tokens and Styles
-│   │
+├── app/
+│   ├── api/
+│   │   ├── analyze-project/       # Codebase X-Ray analysis endpoint
+│   │   ├── generate-prd/           # PRD generation endpoint
+│   │   ├── generate-problem/       # Problem statement generation
+│   │   ├── generate-roast/         # Judge roast / project critique
+│   │   └── generate-usps/          # USP generation
 │   ├── game/
-│   │   └── page.tsx                  # Main Orchestrator and 14 Stage Components
-│   │
+│   │   └── page.tsx                # Hackathon simulation
 │   ├── results/
-│   │   └── page.tsx                  # Static Results Page with Radar Charts
-│   │
-│   └── api/                          # Hardened Backend APIs
-│       └── generate-roast/           # Live Project Roast API (OpenAI/OpenRouter/Gemini)
-│
+│   │   └── page.tsx                # Results route
+│   ├── xray/
+│   │   └── page.tsx                # Codebase X-Ray route
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx                    # Mode selection home page
 ├── components/
-│   ├── drag-drop/                    # Accessible @dnd-kit Assemblies
-│   ├── game/                         # Timer, SVG Roulette, Result Screens
-│   └── ui/                           # Primitive shadcn components
-│
-├── data/                             # Curated Game Data
-│   ├── architectureTemplates.ts      # 6 Solution-specific Slots
-│   ├── techRegistry.ts               # 114 Curated Technologies
-│   ├── judges.ts                     # Uday, Bart, Nishika, Sejal, Jitu data
-│   ├── chaosEvents.ts                # 10 Weighted Random Incidents
-│   └── modifiers.ts                  # 21 Rule modifiers
-│
-└── lib/                              # Logic Utilities
-    ├── rateLimit.ts                  # IP sliding-window tracker
-    ├── security.ts                   # XSS, timeout, and injection shields
-    ├── pitchDeckEvaluator.ts         # Slide layout analysis
-    ├── archetypes.ts                 # Project Archetype Classifier
-    └── scoring.ts                    # Scoring Engines
+│   ├── drag-drop/                  # Drag-and-drop UI
+│   ├── game/                       # Simulation components
+│   ├── ui/                         # Reusable UI primitives
+│   └── xray/                       # Upload and analysis report UI
+├── data/
+│   ├── architectureTemplates.ts
+│   ├── chaosEvents.ts
+│   ├── judgeComments.ts
+│   ├── judges.ts
+│   ├── mentorHints.ts
+│   ├── modifiers.ts
+│   ├── problems.ts
+│   ├── techItems.ts
+│   └── techRegistry.ts
+├── lib/
+│   ├── archetypes.ts
+│   ├── dailyChallenge.ts
+│   ├── pitchDeckEvaluator.ts
+│   ├── prdGenerator.ts
+│   ├── projectAnalyzer.ts
+│   ├── projectStrategyGenerator.ts
+│   ├── randomizer.ts
+│   ├── rateLimit.ts
+│   ├── recommendations.ts
+│   ├── scoring.ts
+│   ├── security.ts
+│   ├── utils.ts
+│   └── zipExtractor.ts
+├── store/
+│   └── gameStore.ts
+├── types/
+│   └── game.ts
+├── next.config.ts
+├── package.json
+└── tsconfig.json
 ```
 
----
-
-## Getting Started
+## 🚀 Getting started
 
 ### Prerequisites
 
-- **Node.js** version 18.0 or higher
-- **npm** version 9.0 or higher
+- Node.js compatible with Next.js 16 (Node.js 20.9 or later is recommended).
+- npm.
 
-### Installation
+### 1. Clone the repository
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/udaysharmadev/The-Hackathon-Simulator.git
-   cd The-Hackathon-Simulator
-   ```
+```bash
+git clone https://github.com/Subhradip304/Project_ORION.git
+cd Project_ORION
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+If you are using a fork or a different repository URL, replace the clone URL and directory name with your own.
 
-3. Start the local development server:
-   ```bash
-   npm run dev
-   ```
+### 2. Install dependencies
 
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env.local` file in the project root if you want to enable AI-powered generation and X-Ray enrichment.
+
+```env
+OPENAI_API_KEY=your_openai_api_key
+OPENROUTER_API_KEY=your_openrouter_api_key
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+The application checks the configured providers in its route-specific fallback order. You do not need to commit `.env.local` to Git. Keep API keys private.
+
+Some endpoints can return local or static fallback results when AI services are not configured or a provider request fails. The exact fallback behavior depends on the endpoint.
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 5. Create a production build
+
+```bash
+npm run build
+npm run start
+```
+
+### Available scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Starts the Next.js development server |
+| `npm run build` | Creates a production build |
+| `npm run start` | Starts the production server |
+| `npm run lint` | Runs ESLint |
+
+## 🔌 API routes
+
+The project includes the following server-side POST endpoints:
+
+| Endpoint | Purpose |
+|---|---|
+| `/api/analyze-project` | Accepts a project ZIP and returns a structured X-Ray analysis report |
+| `/api/generate-prd` | Generates a project requirements document from simulation state |
+| `/api/generate-problem` | Generates a hackathon problem statement |
+| `/api/generate-roast` | Generates judge-style feedback or a roast for a simulation run |
+| `/api/generate-usps` | Generates unique selling proposition suggestions |
+
+These routes validate incoming data and use server-side API keys. Do not expose provider keys in client-side code.
+
+## 🛡️ X-Ray archive handling and limitations
+
+The X-Ray upload and extraction pipeline applies limits before inspecting archive contents.
+
+- Accepted upload format: `.zip`.
+- Maximum compressed archive size: **25 MB**.
+- Maximum archive entries: **1,000**.
+- Maximum total extracted content: **50 MB**.
+- Maximum individual extracted file size: **2 MB**.
+- Common generated or dependency directories such as `node_modules`, `.git`, `.next`, `dist`, `build`, and virtual environments are skipped.
+- Environment files and common private-key/credential filenames are excluded from analysis.
+- Only recognized text-oriented file extensions are read as source text.
+
+These controls help constrain archive processing. They do not make arbitrary uploaded code safe to execute. The X-Ray analyzer reads selected file contents; it does not execute uploaded scripts.
+
+AI-enriched results depend on provider availability, valid credentials, network access, and the quality of the source material. Static findings can be incomplete or produce false positives. Review important findings manually.
+
+## 🔐 Security notes
+
+The repository includes server-side request validation, rate limiting, input checks, timeout handling, ZIP path validation, archive-size limits, and security-related response headers.
+
+Security analysis from X-Ray is informational. It should not replace dependency auditing, automated testing, code review, secret scanning, or a professional security assessment.
+
+For deployment, configure environment variables in the hosting provider's server-side environment settings. Never publish real credentials in the repository, screenshots, logs, or issue reports.
+
+## 🧪 Quality checks
+
+Before submitting changes, run:
+
+```bash
+npm run lint
+npm run build
+```
+
+Also test the two main application paths manually:
+
+- Start a Classic Hackathon Simulation and progress through the available stages.
+- Upload a small valid project ZIP in Codebase X-Ray and inspect the resulting report.
+- Test invalid file types and oversized ZIP files.
+- Test X-Ray with AI credentials configured and without them to verify the applicable report behavior.
+
+## 🤝 Contributing
+
+Contributions and suggestions are welcome.
+
+1. Fork the repository.
+2. Create a branch: `git checkout -b feature/your-feature`.
+3. Make focused changes and keep TypeScript types up to date.
+4. Run linting and the production build.
+5. Commit your changes: `git commit -m "feat: describe your change"`.
+6. Push your branch and open a pull request.
+
+For bug reports, include the steps to reproduce the issue, expected behavior, actual behavior, and relevant sanitized logs. Do not include API keys, private source code, or personal data.
+
+## 📄 License
+
+No license file was present in the supplied project archive. Add a `LICENSE` file and update this section if you intend to distribute the project under a specific open-source license.
 
 ---
 
-## Contributing
+<div align="center">
 
-We welcome contributions to expand the simulator. To get started:
+**THE HACKATHON SIMULATOR**
 
-1. **Fork** the repository.
-2. Create a feature branch: `git checkout -b feature/amazing-feature`.
-3. Commit your changes with clear descriptions: `git commit -m "feat: add robust IoT database templates"`.
-4. Push your branch: `git push origin feature/amazing-feature`.
-5. Open a Pull Request.
+*Plan a project. Understand the code. Make better decisions.*
 
-Please ensure all additions compile cleanly and include appropriate TypeScript interfaces in `types/game.ts`.
-
----
-
+</div>
