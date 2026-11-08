@@ -218,21 +218,19 @@ The-Hackathon-Simulator/
 └── tsconfig.json
 ```
 
-## 🚀 Getting started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js compatible with Next.js 16 (Node.js 20.9 or later is recommended).
-- npm.
+- Node.js 20.9 or later
+- npm
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Subhradip304/Project_ORION.git
-cd Project_ORION
+git clone https://github.com/Subhradip304/The-Hackathon-Simulator-main-feature-dual-mode-codebase-xray_86.git
+cd The-Hackathon-Simulator-main-feature-dual-mode-codebase-xray_86
 ```
-
-If you are using a fork or a different repository URL, replace the clone URL and directory name with your own.
 
 ### 2. Install dependencies
 
@@ -242,7 +240,7 @@ npm install
 
 ### 3. Configure environment variables
 
-Create a `.env.local` file in the project root if you want to enable AI-powered generation and X-Ray enrichment.
+Create a `.env.local` file in the root directory if you want to use AI-powered features.
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
@@ -250,11 +248,11 @@ OPENROUTER_API_KEY=your_openrouter_api_key
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-The application checks the configured providers in its route-specific fallback order. You do not need to commit `.env.local` to Git. Keep API keys private.
+Add only the API keys required by the providers configured in the project. Keep your API keys private and never commit `.env.local` to GitHub.
 
-Some endpoints can return local or static fallback results when AI services are not configured or a provider request fails. The exact fallback behavior depends on the endpoint.
+AI-powered features may use fallback responses when API credentials are missing or a provider request fails.
 
-### 4. Run the development server
+### 4. Start the development server
 
 ```bash
 npm run dev
@@ -262,22 +260,21 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 5. Create a production build
+### 5. Build for production
 
 ```bash
 npm run build
 npm run start
 ```
 
-### Available scripts
+### Available Scripts
 
 | Command | Description |
 |---|---|
-| `npm run dev` | Starts the Next.js development server |
-| `npm run build` | Creates a production build |
-| `npm run start` | Starts the production server |
-| `npm run lint` | Runs ESLint |
-
+| `npm run dev` | Start development server |
+| `npm run build` | Build the application |
+| `npm run start` | Run production server |
+| `npm run lint` | Run ESLint checks |
 ## 🔌 API routes
 
 The project includes the following server-side POST endpoints:

@@ -195,7 +195,14 @@ export async function POST(req: Request) {
     // Safety check on judgeFeedback array access
     const feedbackList = sanitizedState.judgeFeedback || [];
     const feedback = feedbackList[feedbackList.length - 1];
-    const finalScoreVal = feedback?.score || 0;
+    const scoreCandidate = typeof sanitizedState.score === "number"
+      ? sanitizedState.score
+      : typeof sanitizedState.score === "object" && sanitizedState.score !== null
+        ? (sanitizedState.score as { total?: number }).total ?? 0
+        : 0;
+    const finalScoreVal = typeof scoreCandidate === "number" && Number.isFinite(scoreCandidate) && scoreCandidate > 0
+      ? scoreCandidate
+      : (typeof feedback?.score === "number" ? feedback.score : 0);
     const displayScore = (finalScoreVal / 2).toFixed(1);
     
     const archetype = classifyProjectArchetype({
@@ -248,7 +255,12 @@ export async function POST(req: Request) {
 
     // Reconstruct score breakdown cleanly
     let innov = 0, exec = 0, des = 0, pit = 0;
-    if (typeof sanitizedState.score === "object" && sanitizedState.score !== null) {
+    if (typeof sanitizedState.score === "number") {
+      innov = sanitizedState.score;
+      exec = sanitizedState.score;
+      des = sanitizedState.score;
+      pit = sanitizedState.score;
+    } else if (typeof sanitizedState.score === "object" && sanitizedState.score !== null) {
       innov = sanitizedState.score.innovation || 0;
       exec = sanitizedState.score.execution || 0;
       des = sanitizedState.score.design || 0;
